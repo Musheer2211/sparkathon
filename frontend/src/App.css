@@ -119,3 +119,17 @@ body, html {
   text-decoration: underline;
   color: #0056b3;
 }
+
+
+.statbutton{
+  border-radius: 25px;
+  height: auto;
+  padding: 5px;
+ transition:  0.3s ease, transform 0.2s ease;}
+
+.statbutton:hover{
+  transform: scale(1.2);
+  box-shadow: 1px 1px 1px #f0f4f8 ;
+  border: 1px solid gray;
+  background-color: black;
+}
