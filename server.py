@@ -17,7 +17,7 @@ db = myclient["spark"]
 
 col = db["dish"]
 
-ingredients = db['ingredients']
+ingredient_count = db['ingredient_count']
 
 dish_count = db['dish_count']
 
@@ -27,23 +27,23 @@ def update_ingredient_stats(ingredient : str):
     
 
         
-    query = list(ingredients.find({'ingredient' : ingredient}))
+    query = list(ingredient_count.find({'ingredient' : ingredient}))
     
     if not len(query):
-        ingredients.insert_one({'ingredient' :ingredient , 'quantity' : 1})
+        ingredient_count.insert_one({'ingredient' :ingredient , 'quantity' : 1})
     else:
-        ingredients.update_one({'ingredient' : ingredient},{'$inc' : {'quantity' :1}})
+        ingredient_count.update_one({'ingredient' : ingredient},{'$inc' : {'quantity' :1}})
 
 def update_dish_stats(dish : str):
     dish = dish.lower().strip()
 
     query = list(dish_count.find({'dish' : dish}))
-    print('tf')
+   
     if not len(query):
         dish_count.insert_one({'dish' :dish , 'quantity' : 1})
-        print(1)
+        
     else:
-        print(2)
+        
         dish_count.update_one({'dish' : dish},{'$inc' : {'quantity' :1}})
 
 
@@ -51,6 +51,16 @@ def update_dish_stats(dish : str):
 
 app = flask.Flask('test')
 CORS(app,allow_headers='*')
+
+@app.route('/api/dishstat',methods =['GET'])
+def show_dish_stat():
+    print(list(dish_count.find({},{'_id' : 0})))
+    return list(dish_count.find({},{'_id' : 0}))
+
+@app.route('/api/ingredientstat',methods =['GET'])
+def show_ingredient_stat():
+    print(list(ingredient_count.find({},{'_id' : 0})))
+    return list(ingredient_count.find({},{'_id' : 0}))
 
 @app.route('/api/recipe/<dish>',methods =['GET'])
 def show_recipe(dish):
