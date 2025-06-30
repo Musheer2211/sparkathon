@@ -51,7 +51,7 @@ def recipe_listings(dish : str):
     rec = recipe(dish=dish)
     print(time.time())
     urls = [f"https://ecommerce.api.zenrows.com/v1/targets/walmart/discovery/{quote(ingredient['name'])}" for ingredient in rec['ingredients']]
-    with Pool(processes=4) as pool:
+    with Pool(processes=8) as pool:
         listings = pool.map(fetch,urls)
         for i in range(len(listings)):
             
@@ -64,4 +64,4 @@ def recipe_listings(dish : str):
     
 
 if __name__ == '__main__':
-    print(recipe_listings('White Sauce Pasta'))
+    recipe_listings('White Sauce Pasta')

@@ -14,5 +14,5 @@ def recipe(dish : str):
     
 
 if __name__ == '__main__':
-    result = recipe('pulao')
+    result = recipe('Butter Chicken')
     print("\n\nParsed JSON Result:\n", result)
