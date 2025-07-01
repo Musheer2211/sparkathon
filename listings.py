@@ -9,7 +9,7 @@ from multiprocessing import Pool
 from recipe_ing import recipe
 
 params = {
-    "apikey": "ccc52268483011bdb5f33783f026b6b212332aa9",
+    "apikey": "ad0e0d59bd944f6737377167194a8c32c0f288bb",
     'tld' : '.com'
 }
 

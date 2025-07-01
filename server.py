@@ -72,6 +72,7 @@ def show_recipe(dish):
 def recipe_links(dish : str):
     print(time())
     query = list(col.find({'dish' : dish.lower()}))
+    print(query)
     
     if len(query):
         update_dish_stats(dish)
@@ -91,7 +92,7 @@ def recipe_links(dish : str):
     update_dish_stats(dish)
 
     with Pool(processes=6) as pool:
-        pool.map(update_ingredient_stats,list(chain(*[ingredient_processing(i['name']) for i in query[0]['json']['ingredients'] ])))
+        pool.map(update_ingredient_stats,list(chain(*[ingredient_processing(i['name']) for i in result['ingredients'] ])))
     return result
 
 if __name__ == '__main__':
